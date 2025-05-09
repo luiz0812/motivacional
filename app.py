@@ -14,33 +14,36 @@ def obter_resposta():
     return resposta
 
 def mostrar_resposta(resposta):
-    if resposta.status_code == 200:
-        advice = resposta.json()['advice']
-        return advice
-    else:
-       st.error( f"Que pena agora não tem mensagem para você😓,volte depois")
-
+     if resposta.status_code == 200:
+         advice = resposta.json()['advice']
+         return advice
+     else:
+         st.write('')
 def chamar_idioma():
-    idioma = st.radio(
-        label= 'Escolha um dos idiomas para ver sua mensagem motivacional',
-        options=[
-        'Português',
-        'Inglês'
-        ]
-    )
+    try:
+        idioma = st.radio(
+            label= 'Escolha um dos idiomas para ver sua mensagem motivacional',
+            options=[
+                'Português',
+                'Inglês',
+                'Espanhol'
+            ]
+        )
 
-    if idioma == 'Português':
-        st.success(GoogleTranslator(
-            source='en',
-            target='pt'
+        if idioma == 'Português':
+            st.success(GoogleTranslator(
+                source='en',
+                target='pt'
             ).translate(mostrar_resposta(obter_resposta())))
-    elif idioma == 'Inglês':
-         st.success(GoogleTranslator(
-            source='pt',
-            target='en'
-            ).translate(mostrar_resposta(obter_resposta())))     
-    else:
-        st.error('Foi mal ae')
+        elif idioma == 'Espanhol':
+            st.success(GoogleTranslator(
+                source='en',
+                target='es'
+            ).translate(mostrar_resposta(obter_resposta())))
+        else:
+            st.success(mostrar_resposta(obter_resposta()))      
+    except Exception:
+        st.error('Foi mal mas nao consigo gerar sua mensagem')
 
 
 st.button(
@@ -52,7 +55,4 @@ st.button(
 
 st.title("Mensagem incetivadora!!!")
 chamar_idioma()
-st.write('#####  **volte sempre que precisar de uma mensagem!!!👌** ####')
-
-
-
+st.write('#####  **Volte sempre que precisar de uma mensagem!!!👌** ####')
