@@ -43,7 +43,8 @@ def chamar_idioma():
         else:
             st.success(mostrar_resposta(obter_resposta()))      
     except Exception:
-        st.error('Foi mal mas nao consigo gerar sua mensagem')
+            st.error('#### Foi mal,mas no momento não consigo gerar sua mensagem motivacional!!\n\n ###### Deve ser seu dia de sorte😉')
+
 
 
 st.button(
